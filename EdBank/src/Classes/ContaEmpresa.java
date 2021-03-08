@@ -4,18 +4,22 @@ import java.util.Scanner;
 
 public class ContaEmpresa extends Conta {
 	double emprestimoEmpresa = 0;
-	Scanner s = new Scanner(System.in);
+	Scanner ler = new Scanner(System.in);
 
 	public ContaEmpresa() {
-		System.out.println("Logue na sua conta.");
-		System.out.println("Digite o numero da sua conta:");
-		numero = s.nextInt();
-		System.out.println("Digite o seu CPF: ");
-		cpf = s.next();
-		System.out.println("Essa conta esta ativa?");
-		System.out.println();
-		System.out.println("[1]Ativa[2]inativa");
-		int a = s.nextInt();
+		System.out.println("");
+		System.out.println("        Painel - Informe os dados da sua conta \n");
+		System.out.println("    ========================================== \n");
+		System.out.println("              Informe o numero da contas");
+		System.out.print("                      (4 digitos):               \n");
+		numero = ler.nextInt();
+		System.out.println("              Informe o numero do CPF:           ");
+		System.out.print("                      (11 digitos):               \n");
+		cpf = ler.next();
+		System.out.println("              Essa conta esta ativa?           \n");
+		System.out.println("              [1]Ativa    [2]Inativa           \n");
+		int a = ler.nextInt();
+		System.out.println("    ========================================== \n");
 		if (a == 1)
 			ativa = true;
 		if (a == 2)
@@ -24,15 +28,19 @@ public class ContaEmpresa extends Conta {
 	}
 
 	public void OferecerEmprestimo() {
-		System.out.println("Voc� gostaria de um empr�stimo ? ");
-		var emp = s.next().toLowerCase().charAt(0);
-		if (emp == 's') {
-			System.out.println("...de quanto ? (" + (10000 - emprestimoEmpresa) + " dispon�vel)");
-			double novoEmprestimo = s.nextDouble();
+		System.out.println("Emprestimo disponivel, deseja solicitar?\n");
+		System.out.println("Digite [1]SIM [2]NÃO");
+		char emp = ler.next().charAt(0);
+		System.out.println("==========================================\n");
+		if (emp == 1) {
+			System.out.println("Digite o valor: (" + (10000 - emprestimoEmpresa) + "disponiveis.)");
+			double novoEmprestimo = ler.nextDouble();
+			System.out.println("========================================== \n");
 			if (emprestimoEmpresa + novoEmprestimo <= 10000) {
 				FazerEmprestimo(novoEmprestimo);
 			} else {
-				System.out.println("Valor indisponivel. O emprestimo n�o foi realizado.");
+				System.out.println("Valor indisponivel. O emprestimo não foi realizado.");
+				System.out.println("=================================================== \n");
 			}
 		}
 	}
@@ -40,20 +48,34 @@ public class ContaEmpresa extends Conta {
 	public void FazerEmprestimo(double valor) {
 		emprestimoEmpresa = emprestimoEmpresa + valor;
 		Credito(valor);
-		System.out.println("Emprestimo de " + valor + " realizado.");
+		System.out.println("++++++++++++++++++++++++++ Extrato Conta +++++++++++++++++++++");
+		System.out.println("\t\tTransação realizada com sucesso.");
+		System.out.println("- Número da conta   \t\t\t " + numero);
+		System.out.println("- Valor da transação\t\t\t R$ " + valor);
+		System.out.println("- Operação          \t\t\t Saque");
+		System.out.println("- Saldo Atual       \t\t\t R$" + getSaldo());
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 	}
 
 	@Override
 	public void Debito(double valor) {
 		if (valor <= getSaldo()) {
 			Debito(valor);
-			System.out.println("Transa��o realizada com sucesso.");
+			System.out.println("++++++++++++++++++++++++++ Extrato Conta +++++++++++++++++++++");
+			System.out.println("\t\tTransação realizada com sucesso.");
+			System.out.println("- Número da conta   \t\t\t " + numero);
+			System.out.println("- Movimentação      \t\t\t R$ " + valor);
+			System.out.println("- Operação          \t\t\t Saque");
+			System.out.println("- Saldo Atual       \t\t\t R$" + getSaldo());
+			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		} else {
-			System.out.println("O d�bito n�o foi realizado. Valor insuficiente em conta.");
+			System.out.println("O débito não foi realizado.\n\tValor insuficiente em conta.");
+			System.out.println("     ===================================================== ");
 			if (emprestimoEmpresa < 10000) {
 				OferecerEmprestimo();
 				Debito(valor);
 			}
 		}
 	}
+}
 }
