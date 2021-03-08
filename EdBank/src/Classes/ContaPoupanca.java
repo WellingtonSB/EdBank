@@ -18,7 +18,7 @@ public class ContaPoupanca extends Conta {
 		System.out.print("                      (4 digitos):               \n");
 		numero = ler.nextInt();
 		System.out.println("              Informe o numero do CPF:           ");
-		System.out.print("                      (10 digitos):               \n");
+		System.out.print("                      (11 digitos):               \n");
 		cpf = ler.next();
 		System.out.println("              Essa conta esta ativa?           \n");
 		System.out.println("              [1]Ativa    [2]Inativa           \n");
@@ -49,14 +49,14 @@ public class ContaPoupanca extends Conta {
 			if (data == aniversarioConta && correcao == false) {
 				correcao = true;
 				System.out.println("");
-				System.out.println("\nSua conta acaba de completar mais um mês em nosso banco.");
-				System.out.println("\tHaverá uma correção no seu saldo de +0,05%.\n");
+				System.out.println("\nSua conta acaba de completar mais um mÃªs em nosso banco.");
+				System.out.println("\tHaverÃ¡ uma correÃ§Ã£o no seu saldo de +0,05%.\n");
 				super.Credito((getSaldo() * 0.05));
 				System.out.println("++++++++++++++++++++++++++ Extrato Conta +++++++++++++++++++++");
-				System.out.println("\t\tTransação realizada com sucesso.");
-				System.out.println("- Número da conta   \t\t\t " + numero);
-				System.out.println("- Valor da transação\t\t\t R$ " + valor);
-				System.out.println("- Operação          \t\t\t Deposito");
+				System.out.println("\t\tTransaÃ§Ã£o realizada com sucesso.");
+				System.out.println("- NÃºmero da conta   \t\t\t " + numero);
+				System.out.println("- Valor da transaÃ§Ã£o\t\t\t R$ " + valor);
+				System.out.println("- OperaÃ§Ã£o          \t\t\t Deposito");
 				System.out.println("- Saldo Atual       \t\t\t R$" + getSaldo());
 				System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 			}
@@ -69,14 +69,14 @@ public class ContaPoupanca extends Conta {
 		if (valor <= getSaldo()) {
 			super.Debito(valor);
 			System.out.println("++++++++++++++++++++++++++ Extrato Conta +++++++++++++++++++++");
-			System.out.println("\t\tTransação realizada com sucesso.");
-			System.out.println("- Número da conta   \t\t\t " + numero);
-			System.out.println("- Valor da transação\t\t\t R$ " + valor);
-			System.out.println("- Operação          \t\t\t Saque");
+			System.out.println("\t\tTransaÃ§Ã£o realizada com sucesso.");
+			System.out.println("- NÃºmero da conta   \t\t\t " + numero);
+			System.out.println("- Valor da transaÃ§Ã£o\t\t\t R$ " + valor);
+			System.out.println("- OperaÃ§Ã£o          \t\t\t Saque");
 			System.out.println("- Saldo Atual       \t\t\t R$" + getSaldo());
 			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		} else {
-			System.out.println("O débito não foi realizado.\n\tValor insuficiente em conta.");
+			System.out.println("O dÃ©bito nÃ£o foi realizado.\n\tValor insuficiente em conta.");
 			System.out.println("==========================================================\n");
 		}
 	}
