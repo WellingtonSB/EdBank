@@ -8,7 +8,7 @@ public class ContaEspecial extends Conta {
 	Scanner ler = new Scanner(System.in);
 
 	public ContaEspecial() {
-
+		System.out.println("");
 		System.out.println("        Painel - Informe os dados da sua conta \n");
 		System.out.println("    ========================================== \n");
 		System.out.println("              Informe o numero da contas");
