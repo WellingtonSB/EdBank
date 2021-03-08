@@ -25,20 +25,20 @@ public class Main {
 			System.out.println("\t\t\tBanco Edbank");
 			System.out.println("\t\t\t*Slogan*");
 			System.out.println();
-			System.out.println("  1 - CONTA POUPANÇA");
+			System.out.println("  1 - CONTA POUPANÃ‡A");
 			System.out.println("  2 - CONTA CORRENTE");
 			System.out.println("  3 - CONTA ESPECIAL");
 			System.out.println("  4 - CONTA EMPRESA");
 			System.out.println("  5 - CONTA ESTUDANTIL");
 			System.out.println("  6 - SAIR");
 			System.out.println();
-			System.out.print("\t\tSELECIONE A OPÇÃO DESEJADA: ");
+			System.out.print("\t\tSELECIONE A OPÃ‡ÃƒO DESEJADA: ");
 			opcao = s.nextInt();
 
-			if (opcao == 1)////////////////////////////////////// CONTA/POUPANÇA///////////////////////////////////////////
+			if (opcao == 1)////////////////////////////////////// CONTA/POUPANÃ‡A///////////////////////////////////////////
 			{
 				conta = new ContaPoupanca();
-				variedade = "POUPANÇA";
+				variedade = "POUPANÃ‡A";
 			} else if (opcao == 2)////////////////////////////////////// CONTA/CORRENTE///////////////////////////////////////////
 			{
 				conta = new ContaCorrente();
@@ -62,7 +62,7 @@ public class Main {
 			do {
 				mov = mov + 1;
 				System.out.println("\t\t\tBanco Edbank");
-				System.out.println("\t\t\t*Feito para você*");
+				System.out.println("\t\t\t*Feito para vocÃª*");
 				System.out.println();
 				System.out.println("CONTA " + variedade);
 				System.out.println("Saldo Atual: " + conta.getSaldo() + "\n");
@@ -75,21 +75,23 @@ public class Main {
 						conta.Debito(valor);
 					} else if (acao == 2) {
 						conta.Credito(valor);
+					} else {
+						System.out.println("Erro, entrada invÃ¡lida.");
+						mov = mov - 1;
+					}
+					System.out.print("Continuar S/N:");
+					var mais = s.next().toUpperCase().charAt(0);
+					if (mais == 'N') {
+						mov = 10;
 					}
 				} else {
-					System.out.println("Erro, entrada inválida.");
-					mov = mov - 1;
-				}
-				System.out.print("Deseja realizar outra operação S/N:");
-				var mais = s.next().toUpperCase().charAt(0);
-				if (mais == 'N') {
+					System.out.println("Conta inativada.");
 					mov = 10;
 				}
 			} while (mov < 10);
 			if (opcao == 2 && conta.getAtiva() == true) {
 				((ContaCorrente) conta).pedirTalao();
 			}
-
 		} while (opcao != 6);
 	}
 }
