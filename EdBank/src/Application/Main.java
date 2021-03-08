@@ -20,22 +20,25 @@ public class Main {
 		Scanner s = new Scanner(System.in);
 
 		do {
-			System.out.println("Banco Edbank");
-			System.out.println("*Slogan*");
 			System.out.println();
-			System.out.println("1 - CONTA POUPANÇA");
-			System.out.println("2 - CONTA CORRENTE");
-			System.out.println("3 - CONTA ESPECIAL");
-			System.out.println("4 - CONTA EMPRESA");
-			System.out.println("5 - CONTA ESTUDANTIL");
-			System.out.println("6 - SAIR");
+			System.out.println("\t========================================== \n");
+			System.out.println("\t\t\tBanco Edbank");
+			System.out.println("\t\t\t*Slogan*");
 			System.out.println();
-			System.out.print("DIGITE O CÓDIGO DA OPÇÃO SELECIONADA: ");
+			System.out.println("  1 - CONTA POUPANÃ‡A");
+			System.out.println("  2 - CONTA CORRENTE");
+			System.out.println("  3 - CONTA ESPECIAL");
+			System.out.println("  4 - CONTA EMPRESA");
+			System.out.println("  5 - CONTA ESTUDANTIL");
+			System.out.println("  6 - SAIR");
+			System.out.println();
+			System.out.print("\t\tSELECIONE A OPÃ‡ÃƒO DESEJADA: ");
 			opcao = s.nextInt();
-			if (opcao == 1)////////////////////////////////////// CONTA/POUPANÇA///////////////////////////////////////////
+			
+			if (opcao == 1)////////////////////////////////////// CONTA/POUPANÃ‡A///////////////////////////////////////////
 			{
 				conta = new ContaPoupanca();
-				variedade = "POUPANÇA";
+				variedade = "POUPANÃ‡A";
 			} else if (opcao == 2)////////////////////////////////////// CONTA/CORRENTE///////////////////////////////////////////
 			{
 				conta = new ContaCorrente();
@@ -57,12 +60,13 @@ public class Main {
 			}
 			do {
 				mov = mov + 1;
-				System.out.println("Banco Edbank");
-				System.out.println("*Slogan*");
+				System.out.println("========================================== \n");
+				System.out.println("\t\t\tBanco Edbank");
+				System.out.println("\t\t\t*Slogan*");
 				System.out.println();
 				System.out.println("CONTA " + variedade);
-				System.out.println("Saldo Atual: " + conta.getSaldo());
-				System.out.print("MOVIMENTO : 1-Debito ou 2-Credito: ");
+				System.out.println("Saldo Atual: " + conta.getSaldo()+"\n");
+				System.out.print("MOVIMENTO : 1-Debito ou 2-Credito: "+"\n");
 				acao = s.nextInt();
 				if (acao == 1 || acao == 2) {
 					System.out.print("Valor do movimento: R$");
@@ -73,15 +77,15 @@ public class Main {
 						conta.Credito(valor);
 					}
 				} else {
-					System.out.println("Erro, entrada inválida.");
+					System.out.println("Erro, entrada invÃ¡lida.");
 					mov = mov - 1;
 				}
 				System.out.print("Continuar S/N:");
 				var mais = s.next().toUpperCase().charAt(0);
 				if (mais == 'N') {
-					mov = 10;
+					mov = 3;
 				}
-			} while (mov < 10);
+			} while (mov < 3);
 			if (opcao == 2) {
 				((ContaCorrente) conta).pedirTalao();
 			}
