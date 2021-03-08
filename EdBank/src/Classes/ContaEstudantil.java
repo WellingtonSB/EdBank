@@ -8,11 +8,14 @@ public class ContaEstudantil extends Conta {
 	Scanner ler = new Scanner(System.in);
 
 	public ContaEstudantil() {
+		System.out.println("");
 		System.out.println("        Painel - Informe os dados da sua conta \n");
 		System.out.println("    ========================================== \n");
-		System.out.println("              Digite o numero da sua conta:    \n");
+		System.out.println("              Informe o numero da contas");
+		System.out.print("                      (4 digitos):               \n");
 		numero = ler.nextInt();
-		System.out.println("              Digite o seu CPF:                \n");
+		System.out.println("              Informe o numero do CPF:           ");
+		System.out.print("                      (11 digitos):               \n");
 		cpf = ler.next();
 		System.out.println("              Essa conta esta ativa?           \n");
 		System.out.println("              [1]Ativa    [2]Inativa           \n");
@@ -27,20 +30,20 @@ public class ContaEstudantil extends Conta {
 	}
 
 	private void solicitarEmprestimo() {
-		System.out.println("     Você gostaria de um empréstimo ?          \n");
-		System.out.println("                [1]Sim [2]Não                  \n");
+		System.out.println("     VocÃª gostaria de um emprÃ©stimo ?          \n");
+		System.out.println("                [1]Sim [2]NÃ£o                  \n");
 		System.out.println("    ========================================== \n");
 		var emp = ler.nextInt();
 		if (emp == 1) {
 
-			System.out.println(" Digite o valor do empréstimo: (" + (5000 - emprestimoEstudantil) + " disponível)");
+			System.out.println(" Digite o valor do emprÃ©stimo: (" + (5000 - emprestimoEstudantil) + " disponÃ­vel)");
 		}
 		double novoEmprestimo = ler.nextDouble();
 		System.out.println("========================================================================");
 		if (emprestimoEstudantil + novoEmprestimo <= 5000) {
 			fazerEmprestimo(novoEmprestimo);
 		} else {
-			System.out.println("Valor indisponível. Não foi possível realizar o empréstimo.");
+			System.out.println("Valor indisponÃ­vel. NÃ£o foi possÃ­vel realizar o emprÃ©stimo.");
 			System.out.println("");
 			System.out.println("========================================================================");
 		}
@@ -55,10 +58,10 @@ public class ContaEstudantil extends Conta {
 	public void Credito(double valor) {
 		super.Credito(valor);
 		System.out.println("++++++++++++++++++++++++++ Extrato Conta +++++++++++++++++++++");
-		System.out.println("\t\tTransação realizada com sucesso.");
-		System.out.println("- Número da conta   \t\t\t " + numero);
-		System.out.println("- Movimentação      \t\t\t R$ " + valor);
-		System.out.println("- Operação          \t\t\t Saque");
+		System.out.println("\t\tTransaÃ§Ã£o realizada com sucesso.");
+		System.out.println("- NÃºmero da conta   \t\t\t " + numero);
+		System.out.println("- MovimentaÃ§Ã£o      \t\t\t R$ " + valor);
+		System.out.println("- OperaÃ§Ã£o          \t\t\t Saque");
 		System.out.println("- Saldo Atual       \t\t\t R$" + getSaldo());
 		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 	}
@@ -68,14 +71,14 @@ public class ContaEstudantil extends Conta {
 		if (valor <= getSaldo()) {
 			super.Debito(valor);
 			System.out.println("++++++++++++++++++++++++++ Extrato Conta +++++++++++++++++++++");
-			System.out.println("\t\tTransação realizada com sucesso.");
-			System.out.println("- Número da conta   \t\t\t " + numero);
-			System.out.println("- Movimentação      \t\t\t R$ " + valor);
-			System.out.println("- Operação          \t\t\t Saque");
+			System.out.println("\t\tTransaÃ§Ã£o realizada com sucesso.");
+			System.out.println("- NÃºmero da conta   \t\t\t " + numero);
+			System.out.println("- MovimentaÃ§Ã£o      \t\t\t R$ " + valor);
+			System.out.println("- OperaÃ§Ã£o          \t\t\t Saque");
 			System.out.println("- Saldo Atual       \t\t\t R$" + getSaldo());
 			System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 		} else {
-			System.out.println("O débito não foi realizado.\n\tValor insuficiente em conta.");
+			System.out.println("O dÃ©bito nÃ£o foi realizado.\n\tValor insuficiente em conta.");
 			System.out.println("     ===================================================== ");
 			if (emprestimoEstudantil < 5000) {
 				solicitarEmprestimo();
@@ -83,5 +86,7 @@ public class ContaEstudantil extends Conta {
 			}
 		}
 	}
+
+}
 
 }
