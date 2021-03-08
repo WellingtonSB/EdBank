@@ -4,59 +4,87 @@ import java.util.Scanner;
 
 public class ContaEspecial extends Conta {
 
-      double LimiteEspecial = 1000;
-    Scanner s = new Scanner(System.in);
-    public ContaEspecial() {
+	double limiteEspecial = 1000;
+	Scanner ler = new Scanner(System.in);
 
-    System.out.println("Logue na sua conta.");
-    System.out.println("Digite o numero da sua conta:");
-    numero = s.nextInt();
-    System.out.println("Digite o seu CPF: ");
-    cpf = s.next();
-    System.out.println("Essa conta esta ativa?");
-    System.out.println();
-    System.out.println("[1]Ativa[2]inativa");
-    char c = s.next().charAt(0);
-    if(c == 1) ativa = true;
-    if(c == 2) ativa = false;
+	public ContaEspecial() {
 
+		System.out.println("        Painel - Informe os dados da sua conta \n");
+		System.out.println("    ========================================== \n");
+		System.out.println("              Informe o numero da contas");
+		System.out.print("                      (4 digitos):               \n");
+		numero = ler.nextInt();
+		System.out.println("              Informe o numero do CPF:           ");
+		System.out.print("                      (11 digitos):               \n");
+		cpf = ler.next();
+		System.out.println("              Essa conta esta ativa?           \n");
+		System.out.println("              [1]Ativa    [2]Inativa           \n");
+		int a = ler.nextInt();
+		System.out.println("    ========================================== \n");
+		if (a == 1)
+			ativa = true;
+		if (a == 2)
+			ativa = false;
 
+	}
 
+	@Override
+	public void Credito(double valor) {
+		super.Credito(valor);
 
-     }
-    @Override
-    public void Debito(double valor) {
-        if(getSaldo() - valor >=0) {
+		System.out.println("++++++++++++++++++++++++++ Extrato Conta +++++++++++++++++++++");
+		System.out.println("\t\tTransação realizada com sucesso.");
+		System.out.println("- Número da conta   \t\t\t " + numero);
+		System.out.println("- Movimentação      \t\t\t R$ " + valor);
+		System.out.println("- Operação          \t\t\t Saque");
+		System.out.println("- Saldo Atual       \t\t\t R$" + getSaldo());
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
-            super.Debito(valor);
-        }
-        else {
+	}
 
-            if(getSaldo() + LimiteEspecial > valor) {
-                System.out.println("Saldo insuficiente...");
-                System.out.println("...usando limite");
-                System.out.print(LimiteEspecial);
+	@Override
+	public void Debito(double valor) {
+		double saldoAtual = getSaldo();
 
-                UsarLimite(valor);
-                System.out.println("==>"+LimiteEspecial);
+		if (valor <= saldoAtual) {
+			super.Debito(valor);
+		}
 
-                Debito(valor);
-            }
+		if (valor > saldoAtual) {
+			double limiteNecessario = valor - saldoAtual;
+			if (limiteNecessario > limiteEspecial) {
+				System.out.println("Transação não realizada.Saldo e limite insuficientes.");
+				System.out.println("===================================================== \n");
+				return;
+			}
 
-            else {
-                System.out.println(" Saldo e limete insuficiente ");
-            }
+			if (saldoAtual > 0) {
+				System.out.println("++++++++++++++++++++++++++ Extrato Conta +++++++++++++++++++++");
+				System.out.println("\t\tTransação realizada com sucesso.");
+				System.out.println("- Número da conta   \t\t\t " + numero);
+				System.out.println("- Movimentação      \t\t\t R$ " + saldoAtual);
+				System.out.println("- Operação          \t\t\t Saque");
+				System.out.println("- Saldo Atual       \t\t\t R$" + getSaldo());
+				System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+				super.Debito(saldoAtual);
+			}
 
+			usarLimite(limiteNecessario);
+		}
+	}
 
-        }
-    }
-
-
-
-        public void UsarLimite(double valor) {
-            double restante = valor - getSaldo();
-            super.Credito(restante);
-            LimiteEspecial = LimiteEspecial - restante;
-
-        }
+	public void usarLimite(double valor) {
+		System.out.println("Valor insuficiente em conta, o valor solicitado será retirado do limite especial.");
+		System.out.println();
+		System.out.println("++++++++++++++++++++++++++ Extrato Conta +++++++++++++++++++++");
+		System.out.println("\t\tTransação realizada com sucesso.");
+		System.out.println("- Número da conta   \t\t\t " + numero);
+		System.out.println("- Movimentação      \t\t\t R$ " + valor);
+		System.out.println("- Limite Restante   \t\t\t R$:" + (limiteEspecial-valor));
+		System.out.println("- Operação          \t\t\t Saque");
+		System.out.println("- Saldo Atual       \t\t\t R$" + getSaldo());
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+		limiteEspecial = limiteEspecial - valor;
+		
+	}
 }
